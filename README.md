@@ -13,3 +13,10 @@ A system for building a self-sustaining family economy.
 git clone https://github.com/0m0D1NGR0NALD/imperium.git
 cd imperium
 npm install
+```
+
+### Running the Backend
+```bash
+npm run dev:backend
+```
+
