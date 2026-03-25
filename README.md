@@ -20,3 +20,15 @@ npm install
 npm run dev:backend
 ```
 
+### Running the Web App
+```bash
+npm run dev:web
+```
+
+### Running the Mobile App
+```bash
+npm run dev:mobile
+```
+
+### Project Structure
+See the [documentation](https://docs.google.com/document/d/1q06tfEv1FUTsblPrjymVlb2iQYWCKAGhimH9hwGQ2JA/edit?usp=sharing) for details.
