@@ -3,8 +3,11 @@ const Family = require('./Family');
 const Constitution = require('./Constitution');
 const Budget = require('./Budget');
 const Account = require('./Account');
+const Transaction = require('./Transaction');
+const SideHustle = require('./SideHustle');
+const InvestmentHierarchy = require('./InvestmentHierarchy');
 
-// Relationships
+// Existing relationships
 Family.hasMany(User);
 User.belongsTo(Family);
 
@@ -17,4 +20,25 @@ Budget.belongsTo(Family);
 Family.hasMany(Account);
 Account.belongsTo(Family);
 
-module.exports = { User, Family, Constitution, Budget, Account };
+// New relationships
+Family.hasMany(Transaction);
+Transaction.belongsTo(Family);
+Account.hasMany(Transaction);
+Transaction.belongsTo(Account);
+
+Family.hasMany(SideHustle);
+SideHustle.belongsTo(Family);
+
+Family.hasMany(InvestmentHierarchy);
+InvestmentHierarchy.belongsTo(Family);
+
+module.exports = {
+  User,
+  Family,
+  Constitution,
+  Budget,
+  Account,
+  Transaction,
+  SideHustle,
+  InvestmentHierarchy
+};
