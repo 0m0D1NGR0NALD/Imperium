@@ -4,6 +4,12 @@ require('dotenv').config();
 const sequelize = require('./config/database');
 const authRoutes = require('./routes/authRoutes');
 const constitutionRoutes = require('./routes/constitutionRoutes');
+const budgetRoutes = require('./routes/budgetRoutes');
+const accountRoutes = require('./routes/accountRoutes');
+const transactionRoutes = require('./routes/transactionRoutes');
+const sideHustleRoutes = require('./routes/sideHustleRoutes');
+const investmentRoutes = require('./routes/investmentRoutes');
+const analyticsRoutes = require('./routes/analyticsRoutes');
 // ... import other route files
 
 const app = express();
@@ -12,6 +18,12 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/constitution', constitutionRoutes);
+app.use('/api/budget', budgetRoutes);
+app.use('/api/accounts', accountRoutes);
+app.use('/api/transactions', transactionRoutes);
+app.use('/api/side-hustles', sideHustleRoutes);
+app.use('/api/investment', investmentRoutes);
+app.use('/api/analytics', analyticsRoutes);
 // ... add other routes
 
 app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
