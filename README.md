@@ -25,6 +25,11 @@ npm run dev:backend
 npm run dev:web
 ```
 
+##### Install Dependencies
+```bash
+npm install axios react-router-dom
+```
+
 ### Running the Mobile App
 ```bash
 npm run dev:mobile
