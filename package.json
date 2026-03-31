@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {
   "name": "imperium",
   "version": "0.1.0",
@@ -17,24 +16,4 @@
     "eslint": "^8.0.0",
     "prettier": "^3.0.0"
   }
-=======
-{
-  "name": "imperium",
-  "version": "0.1.0",
-  "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
-  "scripts": {
-    "dev:backend": "npm run dev --workspace=backend",
-    "dev:web": "npm run dev --workspace=web",
-    "dev:mobile": "npm run dev --workspace=mobile",
-    "build": "npm run build --workspaces",
-    "test": "npm run test --workspaces"
-  },
-  "devDependencies": {
-    "eslint": "^8.0.0",
-    "prettier": "^3.0.0"
-  }
->>>>>>> e0380a80ef86d0afe7354957c4fe0dc9cc5a5a54
 }
