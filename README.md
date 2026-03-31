@@ -4,15 +4,20 @@ A system for building a self-sustaining family economy.
 ## Getting Started
 
 ### Prerequisites
-- Node.js 18+
-- npm 9+
-- PostgreSQL (for backend)
+- Node.js
+- npm
+- PostgreSQL
 
 ### Installation
 ```bash
-git clone https://github.com/0m0D1NGR0NALD/imperium.git
-cd imperium
+git clone https://github.com/0m0D1NGR0NALD/Imperium.git
+cd Imperium
 npm install
+```
+
+##### Install Dependencies
+```bash
+npm install axios react-router-dom
 ```
 
 ### Running the Backend
@@ -23,11 +28,6 @@ npm run dev:backend
 ### Running the Web App
 ```bash
 npm run dev:web
-```
-
-##### Install Dependencies
-```bash
-npm install axios react-router-dom
 ```
 
 ### Running the Mobile App
