@@ -13,9 +13,7 @@ exports.createSideHustle = async (req, res) => {
   try {
     const { name, monthlyIncome, profitAllocationPercent } = req.body;
     const sideHustle = await SideHustle.create({
-      name,
-      monthlyIncome,
-      profitAllocationPercent,
+      name, monthlyIncome, profitAllocationPercent,
       familyId: req.user.familyId
     });
     res.status(201).json(sideHustle);

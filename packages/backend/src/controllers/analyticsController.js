@@ -1,0 +1,54 @@
+const { Transaction, Constitution, Account } = require('../models');
+const { Op } = require('sequelize');
+
+exports.getMonthlyExpenses = async (req, res) => {
+  try {
+    const { months = 1 } = req.query;
+    const startDate = new Date();
+    startDate.setMonth(startDate.getMonth() - parseInt(months));
+    const expenses = await Transaction.sum('amount', {
+      where: {
+        familyId: req.user.familyId,
+        type: 'expense',
+        category: 'needs',
+        date: { [Op.gte]: startDate }
+      }
+    });
+    res.json({ totalExpenses: expenses || 0, periodMonths: months });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+exports.getEmergencyFundStatus = async (req, res) => {
+  try {
+    const constitution = await Constitution.findOne({ where: { familyId: req.user.familyId } });
+    if (!constitution) return res.status(404).json({ error: 'Constitution not found' });
+
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - 30);
+    const monthlyExpenses = await Transaction.sum('amount', {
+      where: {
+        familyId: req.user.familyId,
+        type: 'expense',
+        category: 'needs',
+        date: { [Op.gte]: startDate }
+      }
+    }) || 0;
+
+    const target = monthlyExpenses * constitution.emergencyFundMonths;
+    const current = await Account.sum('balance', {
+      where: { familyId: req.user.familyId, isEmergencyFund: true }
+    }) || 0;
+
+    res.json({
+      monthlyExpenses,
+      emergencyFundMonths: constitution.emergencyFundMonths,
+      target,
+      current,
+      progress: target > 0 ? (current / target) * 100 : 0
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

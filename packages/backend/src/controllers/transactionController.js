@@ -22,16 +22,10 @@ exports.getTransactions = async (req, res) => {
 exports.createTransaction = async (req, res) => {
   try {
     const { amount, date, description, category, type, accountId } = req.body;
-    // Verify account belongs to family
     const account = await Account.findOne({ where: { id: accountId, familyId: req.user.familyId } });
     if (!account) return res.status(400).json({ error: 'Account not found' });
     const transaction = await Transaction.create({
-      amount,
-      date,
-      description,
-      category,
-      type,
-      accountId,
+      amount, date, description, category, type, accountId,
       familyId: req.user.familyId
     });
     res.status(201).json(transaction);

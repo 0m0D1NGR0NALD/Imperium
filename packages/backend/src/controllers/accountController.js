@@ -13,10 +13,7 @@ exports.createAccount = async (req, res) => {
   try {
     const { name, type, balance, isEmergencyFund } = req.body;
     const account = await Account.create({
-      name,
-      type,
-      balance,
-      isEmergencyFund,
+      name, type, balance, isEmergencyFund,
       familyId: req.user.familyId
     });
     res.status(201).json(account);

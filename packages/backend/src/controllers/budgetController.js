@@ -13,7 +13,6 @@ exports.getBudget = async (req, res) => {
 exports.updateBudget = async (req, res) => {
   try {
     const { needsPercent, wantsPercent, savingsPercent } = req.body;
-    // Validate that they sum to 100 (optional)
     if (needsPercent + wantsPercent + savingsPercent !== 100) {
       return res.status(400).json({ error: 'Percentages must sum to 100' });
     }
