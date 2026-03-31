@@ -4,9 +4,9 @@ A system for building a self-sustaining family economy.
 ## Getting Started
 
 ### Prerequisites
-- Node.js 18+
-- npm 9+
-- PostgreSQL (for backend)
+- Node.js
+- npm
+- PostgreSQL
 
 ### Installation
 ```bash
