@@ -11,7 +11,7 @@ A system for building a self-sustaining family economy.
 ### Installation
 ```bash
 git clone https://github.com/0m0D1NGR0NALD/Imperium.git
-cd imperium
+cd Imperium
 npm install
 ```
 
