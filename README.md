@@ -15,24 +15,22 @@ cd Imperium
 npm install
 ```
 
-##### Install Dependencies
-```bash
-npm install axios react-router-dom
-```
-
 ### Running the Backend
 ```bash
-npm run dev:backend
+cd backend
+npm run dev
 ```
 
 ### Running the Web App
 ```bash
-npm run dev:web
+cd web
+npm run dev
 ```
 
 ### Running the Mobile App
 ```bash
-npm run dev:mobile
+cd mobile
+npm run dev
 ```
 
 ### Project Structure
