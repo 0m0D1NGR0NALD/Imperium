@@ -15,6 +15,11 @@ cd Imperium
 npm install
 ```
 
+##### Install Dependencies
+```bash
+npm install axios react-router-dom
+```
+
 ### Running the Backend
 ```bash
 npm run dev:backend
@@ -23,11 +28,6 @@ npm run dev:backend
 ### Running the Web App
 ```bash
 npm run dev:web
-```
-
-##### Install Dependencies
-```bash
-npm install axios react-router-dom
 ```
 
 ### Running the Mobile App
