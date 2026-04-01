@@ -7,7 +7,7 @@ const Transaction = require('./Transaction');
 const SideHustle = require('./SideHustle');
 const InvestmentHierarchy = require('./InvestmentHierarchy');
 
-// Existing relationships
+// Associations
 Family.hasMany(User);
 User.belongsTo(Family);
 
@@ -20,7 +20,6 @@ Budget.belongsTo(Family);
 Family.hasMany(Account);
 Account.belongsTo(Family);
 
-// New relationships
 Family.hasMany(Transaction);
 Transaction.belongsTo(Family);
 Account.hasMany(Transaction);
