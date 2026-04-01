@@ -27,7 +27,6 @@ const Transaction = sequelize.define('Transaction', {
     type: DataTypes.ENUM('income', 'expense', 'transfer'),
     allowNull: false
   },
-  // Link to the account where this transaction occurred
   accountId: {
     type: DataTypes.UUID,
     references: { model: 'Accounts', key: 'id' }
