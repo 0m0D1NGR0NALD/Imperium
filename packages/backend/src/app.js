@@ -12,6 +12,9 @@ const investmentRoutes = require('./routes/investmentRoutes');
 const analyticsRoutes = require('./routes/analyticsRoutes');
 // ... import other route files
 
+// Load models to register them with Sequelize
+require('./models');
+
 const app = express();
 app.use(cors());
 app.use(express.json());
