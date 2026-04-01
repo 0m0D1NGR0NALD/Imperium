@@ -8,28 +8,29 @@ const SideHustle = require('./SideHustle');
 const InvestmentHierarchy = require('./InvestmentHierarchy');
 
 // Associations
-Family.hasMany(User);
-User.belongsTo(Family);
+Family.hasMany(User, { foreignKey: 'familyId' });
+User.belongsTo(Family, { foreignKey: 'familyId' });
 
-Family.hasOne(Constitution);
-Constitution.belongsTo(Family);
+Family.hasOne(Constitution, { foreignKey: 'familyId' });
+Constitution.belongsTo(Family, { foreignKey: 'familyId' });
 
-Family.hasOne(Budget);
-Budget.belongsTo(Family);
+Family.hasOne(Budget, { foreignKey: 'familyId' });
+Budget.belongsTo(Family, { foreignKey: 'familyId' });
 
-Family.hasMany(Account);
-Account.belongsTo(Family);
+Family.hasMany(Account, { foreignKey: 'familyId' });
+Account.belongsTo(Family, { foreignKey: 'familyId' });
 
-Family.hasMany(Transaction);
-Transaction.belongsTo(Family);
-Account.hasMany(Transaction);
-Transaction.belongsTo(Account);
+Family.hasMany(Transaction, { foreignKey: 'familyId' });
+Transaction.belongsTo(Family, { foreignKey: 'familyId' });
 
-Family.hasMany(SideHustle);
-SideHustle.belongsTo(Family);
+Account.hasMany(Transaction, { foreignKey: 'accountId' });
+Transaction.belongsTo(Account, { foreignKey: 'accountId' });
 
-Family.hasMany(InvestmentHierarchy);
-InvestmentHierarchy.belongsTo(Family);
+Family.hasMany(SideHustle, { foreignKey: 'familyId' });
+SideHustle.belongsTo(Family, { foreignKey: 'familyId' });
+
+Family.hasMany(InvestmentHierarchy, { foreignKey: 'familyId' });
+InvestmentHierarchy.belongsTo(Family, { foreignKey: 'familyId' });
 
 module.exports = {
   User,

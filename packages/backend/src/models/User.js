@@ -8,7 +8,7 @@ const User = sequelize.define('User', {
   firstName: { type: DataTypes.STRING },
   lastName: { type: DataTypes.STRING },
   role: { type: DataTypes.ENUM('admin', 'member'), defaultValue: 'member' },
-  familyId: { type: DataTypes.UUID, references: { model: 'Families', key: 'id' } }
+  familyId: { type: DataTypes.UUID, allowNull: false }
 });
 
 module.exports = User;

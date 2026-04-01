@@ -1,12 +1,13 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const Budget = sequelize.define('Budget', {
+const Account = sequelize.define('Account', {
   id: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
-  needsPercent: { type: DataTypes.FLOAT, defaultValue: 50 },
-  wantsPercent: { type: DataTypes.FLOAT, defaultValue: 30 },
-  savingsPercent: { type: DataTypes.FLOAT, defaultValue: 20 },
-  familyId: { type: DataTypes.UUID, references: { model: 'Families', key: 'id' }, unique: true }
+  name: { type: DataTypes.STRING, allowNull: false },
+  type: { type: DataTypes.ENUM('bank', 'brokerage', 'pension', 'cash', 'other'), defaultValue: 'bank' },
+  balance: { type: DataTypes.FLOAT, defaultValue: 0 },
+  isEmergencyFund: { type: DataTypes.BOOLEAN, defaultValue: false },
+  familyId: { type: DataTypes.UUID, allowNull: false }
 });
 
-module.exports = Budget;
+module.exports = Account;

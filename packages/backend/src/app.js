@@ -31,7 +31,11 @@ app.use('/api/analytics', analyticsRoutes);
 
 app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
 
-sequelize.sync({ alter: true }) // only for dev, use migrations in prod
+// sequelize.sync({ alter: true }) // only for dev, use migrations in prod
+//   .then(() => console.log('Database synced'))
+//   .catch(err => console.error('DB sync error:', err));
+
+sequelize.sync({ force: true }) // drop and recreate tables
   .then(() => console.log('Database synced'))
   .catch(err => console.error('DB sync error:', err));
 
