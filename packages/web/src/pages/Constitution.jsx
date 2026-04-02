@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
+import InfoBox from '../components/InfoBox';
 
 const Constitution = () => {
   const [constitution, setConstitution] = useState(null);
@@ -45,8 +46,10 @@ const Constitution = () => {
   if (!constitution) return <div>No constitution found</div>;
 
   return (
-    <div>
+    <div className="container">
       <h1>Family Constitution</h1>
+      <div className="two-column">
+        <div className="main">
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <label>
@@ -70,6 +73,15 @@ const Constitution = () => {
         </label>
         <button type="submit" disabled={saving}>Save</button>
       </form>
+      </div>
+      <div className="sidebar">
+          <InfoBox title="The German Social Market Economy">
+            <p>Germany's post‑war "Economic Miracle" was built on a strong constitution that combined free markets with a robust social safety net.</p>
+            <p>Your Family Constitution creates the same predictable framework for your household finances.</p>
+            <a href="https://en.wikipedia.org/wiki/Social_market_economy" target="_blank" rel="noopener noreferrer">Learn more →</a>
+          </InfoBox>
+        </div>
+      </div>
     </div>
   );
 };
