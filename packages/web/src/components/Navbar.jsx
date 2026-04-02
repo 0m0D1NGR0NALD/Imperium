@@ -22,6 +22,7 @@ const Navbar = () => {
       <Link to="/transactions">Transactions</Link>
       <Link to="/side-hustles">Side Hustles</Link>
       <Link to="/investment">Investment Hierarchy</Link>
+      <Link to="/quarterly-report">Quarterly Report</Link>
       <button onClick={handleLogout}>Logout</button>
     </nav>
   );
