@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
+import InfoBox from '../components/InfoBox';
 
 const InvestmentHierarchy = () => {
   const [steps, setSteps] = useState([]);
