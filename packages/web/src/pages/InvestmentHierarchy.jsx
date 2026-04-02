@@ -52,6 +52,12 @@ const InvestmentHierarchy = () => {
           </li>
         ))}
       </ul>
+      <div className="sidebar">
+        <InfoBox title="The Norwegian Sovereign Wealth Fund">
+          <p>Norway transformed finite oil reserves into the world's largest sovereign wealth fund by consistently investing surpluses for future generations. Your investment hierarchy is your family's version of that discipline.</p>
+          <a href="https://www.nbim.no" target="_blank" rel="noopener noreferrer">Learn more →</a>
+        </InfoBox>
+      </div>
     </div>
   );
 };
