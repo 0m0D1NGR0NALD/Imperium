@@ -69,6 +69,12 @@ const Budget = () => {
         </label>
         <button type="submit" disabled={saving}>Save</button>
       </form>
+      <div className="sidebar">
+        <InfoBox title="Singapore's Forced Savings">
+          <p>The Central Provident Fund (CPF) mandates savings for housing, healthcare, and retirement. Automating your 50/30/20 budget creates a similar non‑negotiable discipline.</p>
+          <a href="https://www.cpf.gov.sg" target="_blank" rel="noopener noreferrer">Learn more →</a>
+        </InfoBox>
+      </div>
     </div>
   );
 };
