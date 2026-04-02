@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth, AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
+import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
@@ -11,6 +12,7 @@ import Accounts from './pages/Accounts';
 import Transactions from './pages/Transactions';
 import SideHustles from './pages/SideHustles';
 import InvestmentHierarchy from './pages/InvestmentHierarchy';
+import QuarterlyReport from './pages/QuarterlyReport';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -26,15 +28,17 @@ function AppRoutes() {
       <Navbar />
       <div style={{ padding: '1rem' }}>
         <Routes>
+          <Route path="/" element={user ? <Dashboard /> : <LandingPage />} />
           <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
           <Route path="/register" element={user ? <Navigate to="/" /> : <Register />} />
-          <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/constitution" element={<ProtectedRoute><Constitution /></ProtectedRoute>} />
           <Route path="/budget" element={<ProtectedRoute><Budget /></ProtectedRoute>} />
           <Route path="/accounts" element={<ProtectedRoute><Accounts /></ProtectedRoute>} />
           <Route path="/transactions" element={<ProtectedRoute><Transactions /></ProtectedRoute>} />
           <Route path="/side-hustles" element={<ProtectedRoute><SideHustles /></ProtectedRoute>} />
           <Route path="/investment" element={<ProtectedRoute><InvestmentHierarchy /></ProtectedRoute>} />
+          <Route path="/quarterly-report" element={<ProtectedRoute><QuarterlyReport /></ProtectedRoute>} />
         </Routes>
       </div>
     </>
