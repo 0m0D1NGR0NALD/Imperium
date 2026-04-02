@@ -75,6 +75,12 @@ const SideHustles = () => {
         <button type="submit">{editingId ? 'Update' : 'Add'} Side Hustle</button>
         {editingId && <button type="button" onClick={() => { setEditingId(null); setForm({ name: '', monthlyIncome: 0, profitAllocationPercent: 100 }); }}>Cancel</button>}
       </form>
+      <div className="sidebar">
+        <InfoBox title="The German Mittelstand">
+          <p>Germany's economy is powered by small, specialised, family‑owned businesses. Your side hustle is your family's Mittelstand – a resilient income stream that builds wealth over time.</p>
+          <a href="https://en.wikipedia.org/wiki/Mittelstand" target="_blank" rel="noopener noreferrer">Learn more →</a>
+        </InfoBox>
+      </div>
       <ul>
         {hustles.map(h => (
           <li key={h.id}>
@@ -84,12 +90,6 @@ const SideHustles = () => {
           </li>
         ))}
       </ul>
-      <div className="sidebar">
-        <InfoBox title="The German Mittelstand">
-          <p>Germany's economy is powered by small, specialised, family‑owned businesses. Your side hustle is your family's Mittelstand – a resilient income stream that builds wealth over time.</p>
-          <a href="https://en.wikipedia.org/wiki/Mittelstand" target="_blank" rel="noopener noreferrer">Learn more →</a>
-        </InfoBox>
-      </div>
     </div>
   );
 };
