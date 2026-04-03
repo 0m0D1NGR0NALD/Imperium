@@ -176,3 +176,22 @@ input, select, textarea {
   margin: 2rem auto;
   font-size: 1rem;
 }
+
+.skeleton-card {
+  background: #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  animation: pulse 1.5s infinite;
+}
+.skeleton-line {
+  height: 1rem;
+  background: #ccc;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+}
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
