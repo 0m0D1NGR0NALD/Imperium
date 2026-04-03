@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import MetricCard from '../components/MetricCard';
 import FlywheelChart from '../components/FlywheelChart';
+import BudgetVsActual from '../components/BudgetVsActual';
 
 const Dashboard = () => {
   const [emergencyFund, setEmergencyFund] = useState(null);
@@ -21,7 +22,6 @@ const Dashboard = () => {
         setEmergencyFund(efRes.data);
         setMonthlyExpenses(expRes.data);
         setConstitution(conRes.data);
-        // optional: set monthly contribution from constitution savings rate (if we had income)
       } catch (err) {
         console.error(err);
       } finally {
@@ -35,7 +35,7 @@ const Dashboard = () => {
     setMonthlyContribution(parseFloat(e.target.value) || 0);
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className="container">Loading...</div>;
 
   return (
     <div className="container">
@@ -72,6 +72,9 @@ const Dashboard = () => {
         <FlywheelChart monthlyContribution={monthlyContribution} />
         <p className="metric-subtitle">Assumes 7% annual return, reinvested.</p>
       </div>
+
+      {/* Add the Budget vs Actual component here */}
+      <BudgetVsActual />
 
       <div className="card">
         <h2>State of the Imperium</h2>
