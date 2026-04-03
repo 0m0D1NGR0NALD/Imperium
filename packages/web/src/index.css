@@ -132,7 +132,6 @@ input, select, textarea {
   color: var(--gray-dark);
 }
 
-/* Landing Page */
 .landing {
   text-align: center;
   padding: 2rem;
@@ -190,8 +189,22 @@ input, select, textarea {
   margin-bottom: 0.5rem;
   border-radius: 4px;
 }
+
 @keyframes pulse {
   0% { opacity: 0.6; }
   50% { opacity: 1; }
   100% { opacity: 0.6; }
+}
+
+@media (max-width: 768px) {
+  .two-column {
+    flex-direction: column;
+  }
+  .metric-card {
+    min-width: 100%;
+  }
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
