@@ -14,7 +14,14 @@ const Navbar = () => {
   if (!user) return null;
 
   return (
-    <nav style={{ display: 'flex', gap: '1rem', padding: '1rem', background: '#f0f0f0' }}>
+    <nav style={{ 
+      display: 'flex', 
+      gap: '1rem', 
+      padding: '1rem', 
+      background: '#f0f0f0',
+      flexWrap: 'wrap',      // ← allows wrapping on small screens
+      alignItems: 'center'
+    }}>
       <Link to="/">Dashboard</Link>
       <Link to="/constitution">Constitution</Link>
       <Link to="/budget">Budget</Link>
@@ -23,7 +30,7 @@ const Navbar = () => {
       <Link to="/side-hustles">Side Hustles</Link>
       <Link to="/investment">Investment Hierarchy</Link>
       <Link to="/quarterly-report">Quarterly Report</Link>
-      <button onClick={handleLogout}>Logout</button>
+      <button onClick={handleLogout} style={{ marginLeft: 'auto' }}>Logout</button>
     </nav>
   );
 };
