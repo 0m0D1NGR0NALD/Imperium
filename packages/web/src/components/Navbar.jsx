@@ -31,6 +31,7 @@ const Navbar = () => {
       <Link to="/investment">Investment Hierarchy</Link>
       <Link to="/quarterly-report">Quarterly Report</Link>
       <Link to="/recurring">Recurring</Link>
+      <Link to="/debt-tracker">Debt Tracker</Link>
       <button onClick={handleLogout} style={{ marginLeft: 'auto' }}>Logout</button>
     </nav>
   );

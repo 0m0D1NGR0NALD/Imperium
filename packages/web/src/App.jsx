@@ -15,6 +15,7 @@ import SideHustles from './pages/SideHustles';
 import InvestmentHierarchy from './pages/InvestmentHierarchy';
 import QuarterlyReport from './pages/QuarterlyReport';
 import RecurringTransactions from './pages/RecurringTransactions';
+import DebtTracker from './pages/DebtTracker';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -42,6 +43,7 @@ function AppRoutes() {
           <Route path="/investment" element={<ProtectedRoute><InvestmentHierarchy /></ProtectedRoute>} />
           <Route path="/quarterly-report" element={<ProtectedRoute><QuarterlyReport /></ProtectedRoute>} />
           <Route path="/recurring" element={<ProtectedRoute><RecurringTransactions /></ProtectedRoute>} />
+          <Route path="/debt-tracker" element={<ProtectedRoute><DebtTracker /></ProtectedRoute>} />
         </Routes>
       </div>
     </>
