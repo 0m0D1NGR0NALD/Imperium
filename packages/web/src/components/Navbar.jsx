@@ -19,7 +19,7 @@ const Navbar = () => {
       gap: '1rem', 
       padding: '1rem', 
       background: '#f0f0f0',
-      flexWrap: 'wrap',      // ← allows wrapping on small screens
+      flexWrap: 'wrap',
       alignItems: 'center'
     }}>
       <Link to="/">Dashboard</Link>
@@ -30,6 +30,7 @@ const Navbar = () => {
       <Link to="/side-hustles">Side Hustles</Link>
       <Link to="/investment">Investment Hierarchy</Link>
       <Link to="/quarterly-report">Quarterly Report</Link>
+      <Link to="/recurring">Recurring</Link>
       <button onClick={handleLogout} style={{ marginLeft: 'auto' }}>Logout</button>
     </nav>
   );
