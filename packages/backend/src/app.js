@@ -10,6 +10,7 @@ const transactionRoutes = require('./routes/transactionRoutes');
 const sideHustleRoutes = require('./routes/sideHustleRoutes');
 const investmentRoutes = require('./routes/investmentRoutes');
 const analyticsRoutes = require('./routes/analyticsRoutes');
+const recurringRoutes = require('./routes/recurringRoutes');
 // ... import other route files
 
 // Load models to register them with Sequelize
@@ -27,6 +28,7 @@ app.use('/api/transactions', transactionRoutes);
 app.use('/api/side-hustles', sideHustleRoutes);
 app.use('/api/investment', investmentRoutes);
 app.use('/api/analytics', analyticsRoutes);
+app.use('/api/recurring', recurringRoutes);
 // ... add other routes
 
 app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
