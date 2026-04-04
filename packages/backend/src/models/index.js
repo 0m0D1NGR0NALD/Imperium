@@ -7,6 +7,7 @@ const Transaction = require('./Transaction');
 const SideHustle = require('./SideHustle');
 const InvestmentHierarchy = require('./InvestmentHierarchy');
 const RecurringTransaction = require('./RecurringTransaction');
+const Debt = require('./Debt');
 
 // Associations
 Family.hasMany(User, { foreignKey: 'familyId' });
@@ -39,6 +40,9 @@ RecurringTransaction.belongsTo(Family, { foreignKey: 'familyId' });
 Account.hasMany(RecurringTransaction, { foreignKey: 'accountId' });
 RecurringTransaction.belongsTo(Account, { foreignKey: 'accountId' });
 
+Family.hasMany(Debt, { foreignKey: 'familyId' });
+Debt.belongsTo(Family, { foreignKey: 'familyId' });
+
 module.exports = {
   User,
   Family,
@@ -48,5 +52,6 @@ module.exports = {
   Transaction,
   SideHustle,
   InvestmentHierarchy,
-  RecurringTransaction
+  RecurringTransaction,
+  Debt
 };
