@@ -9,7 +9,8 @@ const Transaction = sequelize.define('Transaction', {
   category: { type: DataTypes.ENUM('needs', 'wants', 'savings', 'income', 'investment', 'other'), allowNull: false },
   type: { type: DataTypes.ENUM('income', 'expense', 'transfer'), allowNull: false },
   accountId: { type: DataTypes.UUID, allowNull: false },
-  familyId: { type: DataTypes.UUID, allowNull: false }
+  familyId: { type: DataTypes.UUID, allowNull: false },
+  receiptUrl: { type: DataTypes.STRING }
 });
 
 module.exports = Transaction;
