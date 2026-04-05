@@ -16,6 +16,7 @@ import InvestmentHierarchy from './pages/InvestmentHierarchy';
 import QuarterlyReport from './pages/QuarterlyReport';
 import RecurringTransactions from './pages/RecurringTransactions';
 import DebtTracker from './pages/DebtTracker';
+import FamilySettings from './pages/FamilySettings';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -44,6 +45,7 @@ function AppRoutes() {
           <Route path="/quarterly-report" element={<ProtectedRoute><QuarterlyReport /></ProtectedRoute>} />
           <Route path="/recurring" element={<ProtectedRoute><RecurringTransactions /></ProtectedRoute>} />
           <Route path="/debt-tracker" element={<ProtectedRoute><DebtTracker /></ProtectedRoute>} />
+          <Route path="/family-settings" element={<ProtectedRoute><FamilySettings /></ProtectedRoute>} />
         </Routes>
       </div>
     </>
