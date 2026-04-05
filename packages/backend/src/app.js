@@ -21,6 +21,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+app.use(helmet());
+const limiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 100 });
+app.use('/api', limiter);
+
 app.use('/api/auth', authRoutes);
 app.use('/api/constitution', constitutionRoutes);
 app.use('/api/budget', budgetRoutes);
