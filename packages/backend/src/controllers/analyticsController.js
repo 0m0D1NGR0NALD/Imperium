@@ -55,16 +55,22 @@ exports.getEmergencyFundStatus = async (req, res) => {
 
 exports.getNetWorthTimeline = async (req, res) => {
   try {
+    const { Account, Debt } = require('../models');
     const accounts = await Account.findAll({ where: { familyId: req.user.familyId } });
     const debts = await Debt.findAll({ where: { familyId: req.user.familyId } });
     const assets = accounts.reduce((s, a) => s + a.balance, 0);
     const liabilities = debts.reduce((s, d) => s + d.balance, 0);
     const netWorth = assets - liabilities;
-    // For demo, generate last 12 months with random variation
+    // Generate last 12 months of mock data (or use actual transaction history for real timeline)
     const labels = Array.from({ length: 12 }, (_, i) => {
-      const d = new Date(); d.setMonth(d.getMonth() - (11 - i)); return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+      const d = new Date(); d.setMonth(d.getMonth() - (11 - i));
+      return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
     });
-    const data = labels.map(() => netWorth * (0.8 + Math.random() * 0.4));
+    // For a real timeline, you'd query historical balances; here we simulate a slight trend
+    const data = labels.map((_, idx) => netWorth * (0.85 + (idx / 12) * 0.3));
     res.json({ labels, data, current: netWorth });
-  } catch (err) { res.status(500).json({ error: err.message }); }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
 };
