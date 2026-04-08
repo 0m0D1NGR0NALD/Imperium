@@ -35,11 +35,14 @@ exports.deleteRecurring = async (req, res) => {
   } catch (err) { res.status(500).json({ error: err.message }); }
 };
 
-// For cron job
 exports.processRecurring = async (req, res) => {
   try {
+    const { RecurringTransaction, Transaction, Account, Family } = require('../models');
     const now = new Date();
-    const recurringList = await RecurringTransaction.findAll({ where: { nextDate: { [Op.lte]: now } } });
+    const recurringList = await RecurringTransaction.findAll({
+      where: { nextDate: { [Op.lte]: now } }
+    });
+    let processed = 0;
     for (const rec of recurringList) {
       await Transaction.create({
         amount: rec.amount,
@@ -58,7 +61,12 @@ exports.processRecurring = async (req, res) => {
         case 'yearly': next.setFullYear(next.getFullYear() + 1); break;
       }
       await rec.update({ nextDate: next });
+      processed++;
     }
-    res.json({ processed: recurringList.length });
-  } catch (err) { res.status(500).json({ error: err.message }); }
+    if (res && res.json) res.json({ processed });
+    else console.log(`Processed ${processed} recurring transactions`);
+  } catch (err) {
+    console.error('Recurring processing error:', err);
+    if (res && res.status) res.status(500).json({ error: err.message });
+  }
 };
