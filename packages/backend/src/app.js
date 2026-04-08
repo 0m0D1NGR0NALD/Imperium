@@ -13,6 +13,7 @@ const analyticsRoutes = require('./routes/analyticsRoutes');
 const recurringRoutes = require('./routes/recurringRoutes');
 const debtRoutes = require('./routes/debtRoutes');
 const familyRoutes = require('./routes/familyRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
 // ... import other route files
 
 // Load models to register them with Sequelize
@@ -39,6 +40,7 @@ app.use('/api/analytics', analyticsRoutes);
 app.use('/api/recurring', recurringRoutes);
 app.use('/api/debts', debtRoutes);
 app.use('/api/family', familyRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 // ... add other routes
 
 app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
