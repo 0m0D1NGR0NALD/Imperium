@@ -106,13 +106,24 @@ const RecurringTransactions = () => {
     }
   };
 
+  const processNow = async () => {
+  try {
+    const res = await api.post('/recurring/process');
+    toast.success(`Processed ${res.data.processed} transactions`);
+    fetchRecurring();
+  } catch (err) {
+    toast.error('Processing failed');
+  }
+};
+
+
   if (loading) return <div className="container">Loading...</div>;
 
   return (
     <div className="container">
       <h1>Recurring Transactions</h1>
       <p>Automate regular income or expenses (salary, rent, subscriptions).</p>
-
+      <button onClick={processNow}>Process Now</button>
       <div className="two-column">
         <div className="main">
           <form onSubmit={handleSubmit}>
