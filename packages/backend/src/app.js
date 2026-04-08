@@ -45,12 +45,18 @@ app.use('/api/dashboard', dashboardRoutes);
 
 app.get('/health', (req, res) => res.status(200).json({ status: 'ok' }));
 
-// sequelize.sync({ alter: true }) // only for dev, use migrations in prod
-//   .then(() => console.log('Database synced'))
-//   .catch(err => console.error('DB sync error:', err));
-
-sequelize.sync({ force: true }) // drop and recreate tables
-  .then(() => console.log('Database synced'))
+sequelize.sync({ alter: true })
+  .then(() => {
+    console.log('Database synced');
+    // Start cron job only after DB is ready
+    const cron = require('node-cron');
+    const { processRecurring } = require('./controllers/recurringController');
+    cron.schedule('0 2 * * *', () => {
+      console.log('Running recurring transaction processor...');
+      processRecurring({ user: { familyId: null } }, { json: () => {} });
+    });
+    console.log('Recurring transaction scheduler started');
+  })
   .catch(err => console.error('DB sync error:', err));
 
 module.exports = app;
