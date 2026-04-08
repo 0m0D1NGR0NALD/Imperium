@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import MetricCard from '../components/MetricCard';
-import FlywheelChart from '../components/FlywheelChart';
+import NetWorthChart from '../components/NetWorthChart';
 import BudgetVsActual from '../components/BudgetVsActual';
+import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 
 const Dashboard = () => {
+  const [summary, setSummary] = useState(null);
   const [emergencyFund, setEmergencyFund] = useState(null);
-  const [monthlyExpenses, setMonthlyExpenses] = useState(null);
-  const [constitution, setConstitution] = useState(null);
-  const [monthlyContribution, setMonthlyContribution] = useState(500);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [efRes, expRes, conRes] = await Promise.all([
-          api.get('/analytics/emergency-fund'),
-          api.get('/analytics/monthly-expenses?months=1'),
-          api.get('/constitution')
+        const [sumRes, efRes] = await Promise.all([
+          api.get('/dashboard/summary'),
+          api.get('/analytics/emergency-fund')
         ]);
+        setSummary(sumRes.data);
         setEmergencyFund(efRes.data);
-        setMonthlyExpenses(expRes.data);
-        setConstitution(conRes.data);
       } catch (err) {
         console.error(err);
       } finally {
@@ -31,60 +28,47 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
-  const handleContributionChange = (e) => {
-    setMonthlyContribution(parseFloat(e.target.value) || 0);
-  };
+  if (loading) return <div className="container">Loading dashboard...</div>;
 
-  if (loading) return <div className="container">Loading...</div>;
+  const timelineData = summary?.timeline.labels.map((label, idx) => ({
+    month: label,
+    netWorth: summary.timeline.data[idx]
+  }));
 
   return (
     <div className="container">
       <h1>Your Imperium Dashboard</h1>
       <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
+        <MetricCard title="Net Worth" value={`$${summary?.netWorth.toFixed(2)}`} />
+        <MetricCard title="Monthly Savings Rate" value={`${summary?.savingsRate}%`} />
+        <MetricCard title="Side Hustle Income" value={`$${summary?.sideHustleIncome}/mo`} />
+        <MetricCard title="Investments" value={`$${summary?.investmentBalance.toFixed(2)}`} />
         {emergencyFund && (
-          <>
-            <MetricCard
-              title="Emergency Fund"
-              value={`$${emergencyFund.current.toFixed(2)}`}
-              subtitle={`of $${emergencyFund.target.toFixed(2)} target (${emergencyFund.progress.toFixed(0)}%)`}
-            />
-            <MetricCard
-              title="Monthly Expenses (Needs)"
-              value={`$${monthlyExpenses?.totalExpenses.toFixed(2)}`}
-              subtitle="Last 30 days"
-            />
-            <MetricCard
-              title="Constitution Savings Rate"
-              value={`${constitution?.savingsRate || 20}%`}
-              subtitle="of total income"
-            />
-          </>
+          <MetricCard
+            title="Emergency Fund"
+            value={`$${emergencyFund.current.toFixed(2)}`}
+            subtitle={`of $${emergencyFund.target.toFixed(2)}`}
+          />
         )}
       </div>
 
       <div className="card">
-        <h2>Flywheel Projection</h2>
-        <p>See how your monthly contributions compound over time.</p>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Monthly Contribution ($): </label>
-          <input type="number" value={monthlyContribution} onChange={handleContributionChange} step="50" />
-        </div>
-        <FlywheelChart monthlyContribution={monthlyContribution} />
-        <p className="metric-subtitle">Assumes 7% annual return, reinvested.</p>
+        <h2>Net Worth Trend (Last 12 Months)</h2>
+        <LineChart width={600} height={300} data={timelineData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+          <Line type="monotone" dataKey="netWorth" stroke="#D4AF37" />
+          <CartesianGrid stroke="#ccc" />
+          <XAxis dataKey="month" />
+          <YAxis />
+          <Tooltip />
+        </LineChart>
       </div>
 
-      {/* Add the Budget vs Actual component here */}
       <BudgetVsActual />
 
       <div className="card">
-        <h2>State of the Imperium</h2>
-        <ul>
-          <li>✓ Constitution: Active</li>
-          <li>{emergencyFund?.progress === 100 ? '✓' : '◌'} Emergency Fund: {emergencyFund?.progress.toFixed(0)}% funded</li>
-          <li>◌ Sovereign Wealth Fund: Building</li>
-          <li>◌ Mittelstand: Not started</li>
-        </ul>
-        <button>Review Quarterly (coming soon)</button>
+        <h2>Flywheel Projection</h2>
+        <p>Based on your average monthly savings (${(summary?.savingsRate * (summary?.netWorth / 100)).toFixed(2)} estimate).</p>
+        {/* You can reuse FlywheelChart with estimated contribution */}
       </div>
     </div>
   );
