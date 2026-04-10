@@ -1,9 +1,16 @@
-const { Account, Transaction, SideHustle, Debt, sequelize } = require('../models');
+const { Account, Transaction, SideHustle, Debt, User, sequelize } = require('../models');
 const { Op } = require('sequelize');
 
 exports.getDashboardSummary = async (req, res) => {
   try {
-    const familyId = req.user.familyId;
+    const user = await User.findByPk(req.userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    const familyId = user.familyId;
+    if (!familyId) {
+      return res.status(400).json({ error: 'User not associated with a family' });
+    }
     const now = new Date();
     const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
 
